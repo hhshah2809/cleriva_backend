@@ -33,7 +33,7 @@ app.use('/api', authRoutes);
 app.use('/api', profileRoutes);
 app.use('/api', chatRoutes);
 // mount rag routes under /api/rag
-app.use('/api/rag', ragRoutes);
+app.use('/api', ragRoutes);
 
 // ─── Health Check ───────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
