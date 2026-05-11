@@ -1,6 +1,8 @@
 import axios from 'axios';
 import FormData from 'form-data';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const PYTHON_RAG_URL =
   process.env.RAG_SERVICE_URL || 'http://localhost:8000';
 
@@ -36,7 +38,8 @@ export async function forwardToPythonUpload(
 
   try {
     console.log('[RAG] Uploading file to Python service...');
-
+    console.log("PYTHON URL:", PYTHON_RAG_URL);
+  console.log("UPLOAD TARGET:", `${PYTHON_RAG_URL}/api/upload`);
     const response = await axios.post(
       `${PYTHON_RAG_URL}/api/upload`,
       form,
