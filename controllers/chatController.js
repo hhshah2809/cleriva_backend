@@ -65,7 +65,11 @@ export const chat = async (req, res) => {
     let retrievedContext = [];
     try {
       const r = await forwardToPythonRetrieve(userId, message, 5);
-      retrievedContext = r.context || r.results || [];
+      const raw = r.context || r.results || [];
+      retrievedContext = raw.map((x) => {
+        if (typeof x === 'string') return x;
+        return x?.text || x?.content || JSON.stringify(x);
+      });
     } catch (err) {
       console.warn('RAG retrieve failed, continuing without external context', err.message);
     }
