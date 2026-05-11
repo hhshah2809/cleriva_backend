@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 // ─── Middleware ──────────────────────────────────────────────
 app.use(cors({
-  origin: ["https://cleriva-rag-service.onrender.com/","https://cleriva-frontend.vercel.app",process.env.FRONTEND_URL, process.env.RAG_SERVICE_URL, 'http://localhost:5173', 'http://localhost:3000'],
+  origin: ["https://cleriva-rag-service.onrender.com/","https://cleriva-frontend.vercel.app",process.env.FRONTEND_URL, process.env.RAG_SERVICE_URL, 'http://localhost:5173', 'http://localhost:8000'],
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -33,7 +33,7 @@ app.use('/api', authRoutes);
 app.use('/api', profileRoutes);
 app.use('/api', chatRoutes);
 // mount rag routes under /api/rag
-app.use('/api', ragRoutes);
+app.use('/api/rag', ragRoutes);
 
 // ─── Health Check ───────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
